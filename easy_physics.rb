@@ -1,3 +1,4 @@
+#coding:utf-8  
 require 'net/http'
 require 'open-uri'
 require 'uri'
@@ -51,21 +52,68 @@ if (response.code == '200')
 end
 
 # now make a request using the cookies
-get_mark_response = http.get(get_mark_path, { 'Cookie' => cookies })
-get_book_response = http.get(get_book_path, { 'Cookie' => cookies })
-reset_password_response = http.get(reset_password_path, { 'Cookie' => cookies })
-cancel_book_response = http.get(cancel_book_path, { 'Cookie' => cookies })
+#get_mark_response = http.get(get_mark_path, { 'Cookie' => cookies })
+#get_book_response = http.get(get_book_path, { 'Cookie' => cookies })
+#reset_password_response = http.get(reset_password_path, { 'Cookie' => cookies })
+#cancel_book_response = http.get(cancel_book_path, { 'Cookie' => cookies })
 
-file = File.new(File.join("./", get_mark), "w")
-file.puts get_mark_response.body
+#file = File.new(File.join("./", get_mark), "w")
+#file.puts get_mark_response.body
 
-file = File.new(File.join("./", get_book), "w")
-file.puts get_book_response.body
+#file = File.new(File.join("./", get_book), "w")
+#file.puts get_book_response.body
+s = ''
+s = get_book_response.body
 
-file = File.new(File.join("./", cancel_book), "w")
-file.puts cancel_book_response.body
+#file = File.new(File.join("./", cancel_book), "w")
+#file.puts cancel_book_response.body
 
 
-file = File.new(File.join("./", reset_password), "w")
-file.puts reset_password_response.body
+#file = File.new(File.join("./", reset_password), "w")
+#file.puts reset_password_response.body
+data = {}
 
+m  = /<td>.*<\/td>/
+es  = s.scan(m)
+#get sid
+sid = es[0].match('>.+<').to_s
+l = sid.size
+sid =  sid.slice!(1, l-2)
+#get name
+name = es[1].match('>.+<').to_s
+name = name.slice!(1, l-3)
+
+data['name'] = name
+data['sid'] = sid
+
+reds = []
+es.each_index do |index| 
+  if (index % 8 != 0 &&  index % 8 != 1)
+    td = es[index]
+    td = td.match('>.+<').to_s
+    l = td.size
+    td = td.slice(1, l-2)
+    reds << td
+  end
+end
+
+#format as: 
+#data = { 'name' => 'xxx', 
+#         'sid' => 'xxx', 
+#         'test' => {
+#                    [name, add, seat, week, date, period],
+#                    [name, add, seat, week, date, period],
+#                    [name, add, seat, week, date, period],
+#                    [name, add, seat, week, date, period]
+#                  }
+#        }
+
+arrs = []
+
+arrs = reds.each_slice(6).to_a
+
+data['test'] = Array.new
+
+data['test'] = arrs
+
+puts data['test'].inspect

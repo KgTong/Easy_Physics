@@ -234,14 +234,48 @@
 							<table width="100%" border="1">
 								<!--写list.jsp的table内容-->
 								
-									<center>欢迎第一校区&nbsp;&nbsp;袁建华&nbsp;&nbsp;来到物理实验中心
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</center>
-									<tr>
-										<td colspan="7" style="text-align: center;height: 30px">
-											<b>尚未预约实验</b>
-										</td>
-									</tr>
 								
+									<thead>
+										<center>欢迎第一校区&nbsp;&nbsp;袁建华&nbsp;&nbsp;来到物理实验中心
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</center>
+										<tr bgcolor="#005CA5">
+
+											<th><font style="color: #FFF">学号</font></th>
+											<th><font style="color: #FFF">姓名</font></th>
+											<th><font style="color: #FFF">实验名</font></th>
+											<th><font style="color: #FFF">实验地点</font></th>
+											<th><font style="color: #FFF">座位号</font></th>
+											<th><font style="color: #FFF">周次</font></th>
+											<th><font style="color: #FFF">星期</font></th>
+											<th><font style="color: #FFF">节次</font></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										
+											<tr>
+												<td>1120310618</td>
+												<td>袁建华</td>
+												<td>拉伸法测定杨氏弹性模量</td>
+												<td>理学楼622</td>
+												<td>16</td>
+												<td>3</td>
+												<td>二</td>
+												<td>3~4</td>
+											</tr>
+										
+											<tr>
+												<td>1120310618</td>
+												<td>袁建华</td>
+												<td>液体黏度的测定</td>
+												<td>理学楼730</td>
+												<td>1</td>
+												<td>4</td>
+												<td>二</td>
+												<td>3~4</td>
+											</tr>
+										
+									</tbody>
 								
 							</table>
 
