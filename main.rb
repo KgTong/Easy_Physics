@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'json'
 load 'easy_physics.rb'
 
 sid = '1120310618'
@@ -37,4 +38,4 @@ test = physics.format_data(arrs)
 
 physics.set_data(name, test)
 
-puts physics.data
+puts physics.data.to_json

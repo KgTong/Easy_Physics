@@ -50,7 +50,7 @@ class EasyPhysics
     #get_name
     name = es[1].match('>.+<').to_s
     l = name.size
-    name = name.slice!(1, l-2)
+    name = name.slice!(1, l-2).force_encoding("UTF-8")
   end
 
   def solve_matching_info(es)
@@ -73,7 +73,7 @@ class EasyPhysics
     a = {}
     for arr in arrs
       arr.each_index do |index|
-        str = arr[index].to_s
+        str = arr[index].force_encoding("UTF-8")
         case index % 6
         when 0
           a['name'] = str
