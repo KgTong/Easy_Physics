@@ -21,7 +21,7 @@ class EasyPhysics
   end
     
   def set_cookies(response)
-    if(response.code == '200')
+    if(response.code == '200' && !response.body.include?('"result":"err"'))
       all_cookies = response.get_fields('set-cookie')
       cookies_array = Array.new
       all_cookies.each { |cookie|
@@ -29,6 +29,8 @@ class EasyPhysics
       }
 
       cookies = cookies_array.join('; ')
+    else
+      cookies = ''
     end
   end
 
@@ -48,9 +50,13 @@ class EasyPhysics
 
   def get_name(es)
     #get_name
-    name = es[1].match('>.+<').to_s
-    l = name.size
-    name = name.slice!(1, l-2).force_encoding("UTF-8")
+    if !es.empty?
+      name = es[1].match('>.+<').to_s
+      l = name.size
+      name = name.slice!(1, l-2).force_encoding("UTF-8")
+    else
+      return ''
+    end
   end
 
   def solve_matching_info(es)
