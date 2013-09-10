@@ -1,9 +1,10 @@
 # encoding: utf-8
 require 'json'
 load 'easy_physics.rb'
+load 'easy_physics_ext.rb'
 
-sid = '1120310618'
-password = '1120310618'
+sid = '1120310601'
+password = '1120310601'
 
 #format as: 
 #data = { 'name' => 'xxx', 
@@ -39,3 +40,5 @@ test = physics.format_data(arrs)
 physics.set_data(name, test)
 
 puts physics.data.to_json
+
+physics.resetPassword(cookies, '1120310601')
