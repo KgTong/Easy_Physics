@@ -1,6 +1,7 @@
+$:.unshift File.dirname(__FILE__)
 # encoding: utf-8
 require 'json'
-load 'easy_physics.rb'
+require 'easy_physics'
 
 sid      = ARGV[0]
 password = ARGV[1]
@@ -67,5 +68,5 @@ else
   end
 end
   
-f=File.new(File.join("./tmp","#{sid}"), "w+")
+f=File.new(File.join("#{File.dirname(__FILE__)}/tmp","#{sid}"), "w+")
 f.puts physics.data.to_json
