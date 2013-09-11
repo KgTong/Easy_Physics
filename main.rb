@@ -2,8 +2,8 @@
 require 'json'
 load 'easy_physics.rb'
 
-sid      = '1120310616'
-password = '1120310616'
+sid      = ARGV[0]
+password = ARGV[1]
 
 #format as(everything is ok): 
 #       data = { 
@@ -55,9 +55,10 @@ else
     name = physics.get_name(book_html)
 
     book_arrs   = physics.solve_book_matching_info(book_es)
-    #score_arrs  = physics.solve_score_matching_info(score_es)
+    score_arrs  = physics.solve_score_matching_info(score_es)
+    
     #mock score data
-    score_arrs  = [['惠斯通电桥测电阻', '8'], ['光的等厚干涉现象与应用', '9']]
+    #score_arrs  = [['惠斯通电桥测电阻', '8'], ['光的等厚干涉现象与应用', '9']]
 
     #get the all the experiments encapsulated with the form of hash
     test = physics.format_data(book_arrs, score_arrs)
@@ -66,5 +67,5 @@ else
   end
 end
   
-f=File.new(File.join("./tmp","#{sid}.txt"), "w+")
+f=File.new(File.join("./tmp","#{sid}"), "w+")
 f.puts physics.data.to_json
