@@ -51,7 +51,7 @@ else
   #尚无预约
   if book_es.empty?
     physics.data = {}
-    physics['status'] = 3
+    physics.data['status'] = 3
   else
     name = physics.get_name(book_html)
 
