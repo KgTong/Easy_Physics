@@ -34,7 +34,17 @@ class EasyPhysics
     end
   end
 
-  def request_page_and_get_html(cookies)
+  def get_name(html)
+    if !html.empty?
+      name =  html.match('&nbsp;&nbsp;.*&nbsp;&nbsp;').to_s
+      name = name.split('&nbsp;')[2].force_encoding("UTF-8")
+    else
+      return ''
+    end
+  end
+
+  #return the booking page's html
+  def request_page_and_get_book_html(cookies)
     http = Net::HTTP.new('clop.hit.edu.cn')
     get_book_path = '/listBookingInfos.action' 
     get_book_response = http.get(get_book_path, { 'Cookie' => cookies } )
@@ -42,28 +52,18 @@ class EasyPhysics
     s = get_book_response.body
   end
 
-  def match_html(s)
+  def match_html(html)
     m = /<td>.*<\/td>/ 
-    es = s.scan(m)
+    es = html.scan(m)
     return es
   end
 
-  def get_name(es)
-    #get_name
-    if !es.empty?
-      name = es[1].match('>.+<').to_s
-      l = name.size
-      name = name.slice!(1, l-2).force_encoding("UTF-8")
-    else
-      return ''
-    end
-  end
-
-  def solve_matching_info(es)
+  #return a array with the format with [[name, seat, ...], [name, seat, ...], ...]
+  def solve_book_matching_info(book_td_labels)
     reds = []
-    es.each_index do |index|
+    book_td_labels.each_index do |index|
       if(index % 8 != 0 && index % 8 != 1) 
-        td = es[index]
+        td = book_td_labels[index]
         td = td.match('>.+<').to_s
         l = td.size
         td = td.slice(1, l-2)
@@ -74,12 +74,36 @@ class EasyPhysics
     arrs = reds.each_slice(6).to_a
   end
 
-  def format_data(arrs)
+  #return the booking page's html
+  def request_page_and_get_score_html(cookies)
+    http = Net::HTTP.new('clop.hit.edu.cn')
+    get_score_path = '/listScores.action' 
+    get_score_response = http.get(get_score_path, { 'Cookie' => cookies } )
+    s = ''
+    s = get_score_response.body
+  end
+
+  #return a array with the format with [[name, score], [name, score], ...]
+  def solve_score_matching_info(book_td_labels)
+    score_reds = []
+    book_td_labels.each_index do |index|
+        td = book_td_labels[index]
+        td = td.match('>.+<').to_s
+        l = td.size
+        td = td.slice(1, l-2)
+        score_reds << td
+    end
+    
+    score_arrs = score_reds.each_slice(2).to_a
+  end
+
+  def format_data(book_arrs, score_arrs = [])
     test = []
-    a = {}
-    for arr in arrs
-      arr.each_index do |index|
-        str = arr[index].force_encoding("UTF-8")
+    for book_arr in book_arrs
+      a = {}
+
+      book_arr.each_index do |index|
+        str = book_arr[index].force_encoding("UTF-8")
         case index % 6
         when 0
           a['name'] = str
@@ -95,14 +119,26 @@ class EasyPhysics
           a['period'] = str
         end
       end
+  
+      #now insert the score into the a by comparing the experiment_name
+      for score_arr in score_arrs
+          if a.has_value?(score_arr[0])
+            a['score'] = score_arr[1]
+            break
+          else
+            a['score'] = ''
+          end
+      end
+      
+      #now a complete record has generated
       test << a
     end
     test
   end
-  
+
   def set_data(name, test)
     @data['name'] = name 
     @data['test'] = test
+    @data['status'] = 1
   end
-  
 end
