@@ -104,6 +104,7 @@ class EasyPhysics
 
       book_arr.each_index do |index|
         str = book_arr[index].force_encoding("UTF-8")
+        a['score'] = ''
         case index % 6
         when 0
           a['name'] = str
