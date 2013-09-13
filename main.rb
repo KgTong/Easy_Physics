@@ -30,6 +30,10 @@ password = ARGV[1]
 #      data = {
 #                 'status' => 4
 #             }
+#when fail to reset password 
+#      data = {
+#                 'status' => 5
+#             }
 
 #to-do
 #get the score of the user
