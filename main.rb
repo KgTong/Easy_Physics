@@ -9,7 +9,9 @@ password = ARGV[1]
 #format as(everything is ok): 
 #       data = { 
 #                'name'   => 'xxx', 
-#                'status' => 1
+#                'submit' => 'xxx',
+#                'mark'   => 'xxx',
+#                'status' => 1,
 #                'test'   => [
 #                              {name, add, seat, week, date, period, score},
 #                              {name, add, seat, week, date, period, score},
