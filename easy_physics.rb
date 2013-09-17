@@ -85,6 +85,8 @@ class EasyPhysics
 
   #return a array with the format with [[name, score], [name, score], ...]
   def solve_score_matching_info(book_td_labels)
+    submited_report_counts = book_td_labels.shift.split('>')[3].split('<')[0]
+    current_mark = book_td_labels.pop.split('>')[3].split('<')[0]
     score_reds = []
     book_td_labels.each_index do |index|
         td = book_td_labels[index]
@@ -95,6 +97,7 @@ class EasyPhysics
     end
     
     score_arrs = score_reds.each_slice(2).to_a
+    [submited_report_counts, current_mark, score_arrs]
   end
 
   def format_data(book_arrs, score_arrs = [])
@@ -123,7 +126,7 @@ class EasyPhysics
   
       #now insert the score into the a by comparing the experiment_name
       for score_arr in score_arrs
-          if a.has_value?(score_arr[0])
+          if (a['name'].force_encoding("UTF-8") == score_arr[0].force_encoding("UTF-8"))
             a['score'] = score_arr[1]
             break
           else
@@ -137,9 +140,11 @@ class EasyPhysics
     test
   end
 
-  def set_data(name, test)
+  def set_data(name, test, submited_report_counts, current_mark)
     @data['name'] = name 
     @data['test'] = test
     @data['status'] = 1
+    @data['submit'] = submited_report_counts.force_encoding("UTF-8")
+    @data['mark']  = current_mark.force_encoding("UTF-8")
   end
 end

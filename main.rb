@@ -60,7 +60,10 @@ else
     name = physics.get_name(book_html)
 
     book_arrs   = physics.solve_book_matching_info(book_es)
-    score_arrs  = physics.solve_score_matching_info(score_es)
+    score_data  = physics.solve_score_matching_info(score_es)
+    score_arrs  = score_data[2]
+    submited_report_counts =  score_data[0]
+    current_mark = score_data[1]
     
     #mock score data
     #score_arrs  = [['惠斯通电桥测电阻', '8'], ['光的等厚干涉现象与应用', '9']]
@@ -68,7 +71,7 @@ else
     #get the all the experiments encapsulated with the form of hash
     test = physics.format_data(book_arrs, score_arrs)
 
-    physics.set_data(name, test)
+    physics.set_data(name, test, submited_report_counts, current_mark)
   end
 end
   
