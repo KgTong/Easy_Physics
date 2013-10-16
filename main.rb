@@ -60,7 +60,7 @@ else
     physics.data['status'] = 3
   else
     name = physics.get_name(book_html)
-    book_arrs   = physics.solve_book_matching_info(book_es)
+    book_arrs = physics.solve_book_matching_info(book_es)
     # 按周排序
     book_arrs.sort!{ |x, y| x[3].to_i <=> y[3].to_i }
     unless score_es.empty?

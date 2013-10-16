@@ -6,6 +6,8 @@ require 'uri'
 class EasyPhysics
   attr_accessor :data
   
+  WEEK = %{ 1 2 3 4 5 }
+  
   def initialize(sid, password)
     @params = {}
     @params['stuNumber'] = sid
@@ -66,7 +68,21 @@ class EasyPhysics
         td = book_td_labels[index]
         td = td.match('>.+<').to_s
         l = td.size
-        td = td.slice(1, l-2)
+        td = td.slice(1, l-2).force_encoding("UTF-8")
+        if index % 8 == 6
+          case td
+          when '一'
+            td = '1'
+          when '二'
+            td = '2'
+          when '三'
+            td = '3'
+          when '四'
+            td = '4'
+          when '五'
+            td = '5'
+          end 
+        end
         reds << td
       end
     end
