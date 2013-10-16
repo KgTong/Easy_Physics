@@ -60,20 +60,26 @@ else
     physics.data['status'] = 3
   else
     name = physics.get_name(book_html)
-
     book_arrs   = physics.solve_book_matching_info(book_es)
-    score_data  = physics.solve_score_matching_info(score_es)
-    score_arrs  = score_data[2]
-    submited_report_counts =  score_data[0]
-    current_mark = score_data[1]
-    
-    #mock score data
-    #score_arrs  = [['惠斯通电桥测电阻', '8'], ['光的等厚干涉现象与应用', '9']]
+    # 按周排序
+    book_arrs.sort!{ |x, y| x[3].to_i <=> y[3].to_i }
+    unless score_es.empty?
+      score_data  = physics.solve_score_matching_info(score_es)
+      score_arrs  = score_data[2]
+      submited_report_counts =  score_data[0]
+      current_mark = score_data[1]
+      #mock score data
+      #score_arrs  = [['惠斯通电桥测电阻', '8'], ['光的等厚干涉现象与应用', '9']]
 
-    #get the all the experiments encapsulated with the form of hash
-    test = physics.format_data(book_arrs, score_arrs)
-
-    physics.set_data(name, test, submited_report_counts, current_mark)
+      #get the all the experiments encapsulated with the form of hash
+      test = physics.format_data(book_arrs, score_arrs)
+      physics.set_data(name, test, submited_report_counts, current_mark)
+    else
+      # 无成绩
+      score_arrs = []
+      test = physics.format_data(book_arrs, score_arrs)  
+      physics.set_data(name, test, '0', '0')
+    end
   end
 end
   

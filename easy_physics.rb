@@ -124,14 +124,18 @@ class EasyPhysics
         end
       end
   
-      #now insert the score into the a by comparing the experiment_name
-      for score_arr in score_arrs
-          if (a['name'].force_encoding("UTF-8") == score_arr[0].force_encoding("UTF-8"))
-            a['score'] = score_arr[1]
-            break
-          else
-            a['score'] = ''
-          end
+      unless score_arrs.empty? 
+        #now insert the score into the a by comparing the experiment_name
+        for score_arr in score_arrs
+            if (a['name'].force_encoding("UTF-8") == score_arr[0].force_encoding("UTF-8"))
+              a['score'] = score_arr[1]
+              break
+            else
+              a['score'] = ''
+            end
+        end
+      else
+        a['score'] = ''
       end
       
       #now a complete record has generated
