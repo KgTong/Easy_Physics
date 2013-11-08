@@ -53,6 +53,7 @@ else
   #get the array of match
   book_es   = physics.match_html(book_html)
   score_es  = physics.match_html(score_html)
+  puts score_es
   
   #尚无预约
   if book_es.empty?

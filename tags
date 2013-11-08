@@ -1,0 +1,20 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+EasyPhysics	easy_physics.rb	/^class EasyPhysics$/;"	c
+EasyPhysics	easy_physics_ext.rb	/^class EasyPhysics$/;"	c
+format_data	easy_physics.rb	/^  def format_data(book_arrs, score_arrs = [])$/;"	f	class:EasyPhysics
+get_name	easy_physics.rb	/^  def get_name(html)$/;"	f	class:EasyPhysics
+initialize	easy_physics.rb	/^  def initialize(sid, password)$/;"	f	class:EasyPhysics
+match_html	easy_physics.rb	/^  def match_html(html)$/;"	f	class:EasyPhysics
+post_and_get_cookies	easy_physics.rb	/^  def post_and_get_cookies$/;"	f	class:EasyPhysics
+request_page_and_get_book_html	easy_physics.rb	/^  def request_page_and_get_book_html(cookies)$/;"	f	class:EasyPhysics
+request_page_and_get_score_html	easy_physics.rb	/^  def request_page_and_get_score_html(cookies)$/;"	f	class:EasyPhysics
+resetPassword	easy_physics_ext.rb	/^	def resetPassword(cookies, newpassword)$/;"	f	class:EasyPhysics
+set_cookies	easy_physics.rb	/^  def set_cookies(response)$/;"	f	class:EasyPhysics
+set_data	easy_physics.rb	/^  def set_data(name, test, submited_report_counts, current_mark)$/;"	f	class:EasyPhysics
+solve_book_matching_info	easy_physics.rb	/^  def solve_book_matching_info(book_td_labels)$/;"	f	class:EasyPhysics
+solve_score_matching_info	easy_physics.rb	/^  def solve_score_matching_info(book_td_labels)$/;"	f	class:EasyPhysics
